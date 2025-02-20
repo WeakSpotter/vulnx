@@ -1,4 +1,3 @@
-
 import random
 import requests
 from requests.exceptions import TooManyRedirects
@@ -27,7 +26,7 @@ def random_UserAgent():
         "Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36",
         "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1",
         "Mozilla/5.0 (X11; U; Linux x86_64; de; rv:1.9.2.8) Gecko/20100723 Ubuntu/10.04 (lucid) Firefox/3.6.8",
-        "Opera/9.80 (Windows NT 5.1; U; en) Presto/2.10.289 Version/12.01"
+        "Opera/9.80 (Windows NT 5.1; U; en) Presto/2.10.289 Version/12.01",
     ]
     useragents_random = random.choice(useragents_rotate)
     return useragents_random
@@ -51,6 +50,7 @@ def getrequest(
             stream=True,
         )
         return response.text
+
     return get(url)
 
 
@@ -74,4 +74,5 @@ def sendrequest(
             stream=True,
         )
         return response.text
+
     return post(url)

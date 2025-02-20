@@ -1,5 +1,4 @@
-class Helpers():
-
+class Helpers:
     @staticmethod
     def _general_help():
         print("""

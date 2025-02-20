@@ -1,12 +1,11 @@
-
 #!/usr/bin/env python
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 from modules.exploits.prestashop_exploits import PSExploits
 from modules.gathering.host_gathering import GatherHost
 from modules.gathering.cmsgather import prestashop_version
-from modules.dns_dump import dnsdumper,domain_info
+from modules.dns_dump import dnsdumper, domain_info
 from modules.scan_ports import ScanPort
 import sys
 
@@ -18,7 +17,6 @@ class Prestashop(object):
     """
 
     def __init__(self, url=None, headers=None, port=None):
-        
         # init the url & headers.
         self.url = url
         self.headers = headers
@@ -30,15 +28,15 @@ class Prestashop(object):
         return ps.psexploits()
 
     def webinfo(self):
-        whg = GatherHost(self.url,self.headers)
+        whg = GatherHost(self.url, self.headers)
         whg.web_host()
 
     def serveros(self):
-        whg = GatherHost(self.url,self.headers)
+        whg = GatherHost(self.url, self.headers)
         whg.os_server()
 
     def cmsinfo(self):
-        prestashop_version(self.url,self.headers)
+        prestashop_version(self.url, self.headers)
 
     def dnsdump(self):
         return dnsdumper(self.url)
@@ -46,7 +44,7 @@ class Prestashop(object):
     def domaininfo(self):
         return domain_info(self.url)
 
-    def ports(self,port):
+    def ports(self, port):
         self.port = port
-        sp = ScanPort(self.url,self.port)
+        sp = ScanPort(self.url, self.port)
         sp.portscan()

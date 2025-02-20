@@ -7,8 +7,7 @@ WORKDIR /vulnx
 COPY . /vulnx
 
 RUN chown -R vulnx:vulnx /vulnx && \
-    pip install --user --upgrade pip && \
-    pip install --user -r ./requirements.txt
+    pip install -r ./requirements.txt
 
 USER vulnx
 

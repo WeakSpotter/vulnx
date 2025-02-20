@@ -1,17 +1,17 @@
-
 #!/usr/bin/env python
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 from common.colors import run, W, end, good, bad, que, info, bannerblue
 
-class DorkManual():
 
-    def __init__(self,select=None):
+class DorkManual:
+    def __init__(self, select=None):
         self.select = select
 
     def dorkslist(self):
-        print("""
+        print(
+            """
         −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
         %sWordPress          Joomla               Prestashop
         −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−%s
@@ -38,7 +38,9 @@ class DorkManual():
                                                 nvn_export_orders      
                                                 tdpsthemeoptionpanel   
                                                 masseditproduct
-    """ % (W, end))
+    """
+            % (W, end)
+        )
 
     def wp_dorkTable(self):
         print("""
@@ -73,7 +75,6 @@ class DorkManual():
                  """)
 
     def ps_dorkTable(self):
-
         print("""
         Prestashop
         -----------
@@ -115,20 +116,20 @@ class DorkManual():
                 """)
 
     def list(self):
-        if self.select == 'all':
+        if self.select == "all":
             self.dorkslist()
 
-        if self.select == 'wordpress':
+        if self.select == "wordpress":
             self.wp_dorkTable()
-        
-        if self.select == 'joomla':
+
+        if self.select == "joomla":
             self.joo_dorkTable()
-        
-        if self.select == 'prestashop':
+
+        if self.select == "prestashop":
             self.ps_dorkTable()
-        
-        if self.select == 'Lokomedia':
+
+        if self.select == "Lokomedia":
             self.loko_dorkTable()
-        
-        if self.select == 'Drupal':
+
+        if self.select == "Drupal":
             self.dru_dorkTable()

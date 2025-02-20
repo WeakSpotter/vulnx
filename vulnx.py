@@ -156,9 +156,11 @@ def detection():
     results = instance.instanciate()
     if not args.json_output:
         # Print normal output
-        if results and 'elapsed_time' in results:
-            print('\n %s[%s Elapsed Time %s]%s => %.2f seconds ' % 
-                  (Y,W,Y,W,results['elapsed_time']))
+        if results and "elapsed_time" in results:
+            print(
+                "\n %s[%s Elapsed Time %s]%s => %.2f seconds "
+                % (Y, W, Y, W, results["elapsed_time"])
+            )
     return results
 
 
@@ -195,7 +197,7 @@ if __name__ == "__main__":
     interactive_cli()
 
     all_results = []
-    
+
     if url:
         root = url
         if root.startswith("http://"):

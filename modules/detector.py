@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 
 from __future__ import (absolute_import, division, print_function)
@@ -134,35 +133,47 @@ class CMS(object):
     def instanciate(self):
         init_time = time.time()
         cms = self.serialize()
+        results = {
+            'target': self.url,
+            'cms': cms['name'],
+            'results': {}
+        }
+        
         if cms['name']:
             instance = eval(cms['name'])(self.url,self.headers)
-            print ('\n {0}[{1}Target{2}]{3} => {4}{5} \n '.format(B,W,B, W, self.url, end))
-            print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
-            print (' {0} looking for cms' .format(run))
-            print (' {0} CMS : {1}' .format(good , cms['name']))
+            
+            if not self.__getexploit__() and not self.__getwebinfo__() and not self.__getserveros__() \
+               and not self.__getcmsinfo__() and not self.__getdnsdump__() and not self.__getdomain__() \
+               and not self.__getport__():
+                # Just print basic CMS info if no other options specified
+                print('\n {0}[{1}Target{2}]{3} => {4}{5} \n '.format(B,W,B, W, self.url, end))
+                print("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
+                print(' {0} looking for cms' .format(run))
+                print(' {0} CMS : {1}' .format(good , cms['name']))
+                
             if cms['exploit']:
-                print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
-                print(' {0} Exploits Scan'.format(run))
-                instance.exploit()
+                results['results']['exploits'] = instance.exploit()
+                
             if cms['webinfo']:
-                print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
-                print(' {0} OS / Server Information'.format(run))
-                instance.webinfo()
+                results['results']['webinfo'] = instance.webinfo()
+                
             if cms['serveros']:
-                print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
-                print(' {0} Web Hosting Information'.format(run))
-                instance.serveros()
+                results['results']['serveros'] = instance.serveros()
+                
             if cms['cmsinfo']:
-                print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
-                print(' {0} CMS Information Gathering'.format(run))
-                instance.cmsinfo()
-                print ("{0} −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−".format(W))
+                results['results']['cmsinfo'] = instance.cmsinfo()
+                
             if cms['dnsdump']:
-                instance.dnsdump()
+                results['results']['dnsdump'] = instance.dnsdump()
+                
             if cms['domain']:
-                instance.domaininfo()
+                results['results']['domain'] = instance.domaininfo()
+                
             if cms['port']:
-                instance.ports(cms['port'])
-        end_time = time.time()
-        elapsed_time = end_time - init_time
-        print('\n %s[%s Elapsed Time %s]%s => %.2f seconds ' % (Y,W,Y,W,elapsed_time))
+                results['results']['ports'] = instance.ports(cms['port'])
+                
+            end_time = time.time()
+            elapsed_time = end_time - init_time
+            results['elapsed_time'] = elapsed_time
+            
+            return results

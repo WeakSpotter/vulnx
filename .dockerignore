@@ -1,0 +1,9 @@
+.travis.yaml
+.github/
+.gitignore
+
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+README.md
+docker/
